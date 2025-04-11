@@ -1,6 +1,7 @@
 import { Address, formatEther } from 'viem';
 import { createViemPublicClient } from '../viem/createViemPublicClient.js';
 import { ToolConfig } from './allTools.js';
+import { celoAlfajores } from 'viem/chains';
 
 
 interface GetBalanceArgs {
@@ -27,7 +28,10 @@ export const getBalanceTool: ToolConfig<GetBalanceArgs> = {
         }
     },
     handler: async ({ wallet }) => {
-        return await getBalance(wallet);
+        const balance = await getBalance(wallet);
+        const formattedBalance = Number(balance).toFixed(4);
+        const symbol = celoAlfajores.nativeCurrency.symbol;
+        return `${formattedBalance} ${symbol}`;
     }
 };
 

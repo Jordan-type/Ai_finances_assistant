@@ -30,6 +30,4 @@ export async function performRun(run: Run, client: OpenAI, thread: Thread) {
 
     return assistantMessage?.content[0] || { type: 'text', text: { value: 'No response from assistant', annotations: [] }}
 
-
-
 }

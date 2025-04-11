@@ -5,9 +5,7 @@ import { getWalletAddressTool } from "./getWalletAddress.js";
 import { readContractTool } from "./readContract.js";
 import { sendTransactionTool } from "./sendTransaction.js";
 import { deployErc20Tool } from "./deployErc20.js";
-
-
-
+// import { auditTools } from "./smartContractAudit.js";
 
 export interface ToolConfig<T = any> {
     definition: {
@@ -36,6 +34,9 @@ export const tools: Record<string, ToolConfig> = {
     // write tools
     send_transaction: sendTransactionTool,
     deploy_erc20: deployErc20Tool,
+
+    // audit tools
+    // ...auditTools,
 
     // Add more tools here...
 };
