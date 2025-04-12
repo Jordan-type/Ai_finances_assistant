@@ -2,8 +2,8 @@ import { ChatOpenAI } from "@langchain/openai";
 import { AgentExecutor, createReactAgent, createStructuredChatAgent } from "langchain/agents";
 import { DuckDuckGoSearch } from "@langchain/community/tools/duckduckgo_search";
 import { DynamicTool } from "@langchain/core/tools";
-import dotenv from "dotenv";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -22,15 +22,19 @@ export const runMarketAgent = async (idea: string, theme: string) => {
         apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const searchTool = new DuckDuckGoSearch();
+    const searchTool = new DuckDuckGoSearch({ maxResults: 5});
 
     const tools = [
         new DynamicTool({
-            name: "search",
-            description: "Useful for answering market research questions",
+            name: "market_search",
+            description: "Search for market research data, statistics, and insights about the idea.",
             func: async (input: string) => {
-                const result = await searchTool.invoke(input);
-                return result;
+                try {
+                    const result = await searchTool.invoke(input);
+                    return JSON.stringify(result);
+                } catch (error) {
+                    return "Search failed, please rely on reasoning.";
+                }
             }
         })
     ];
@@ -39,18 +43,15 @@ export const runMarketAgent = async (idea: string, theme: string) => {
     const prompt = ChatPromptTemplate.fromMessages([
         [
             "system", 
-            `You are a market research agent that uses the ReAct framework. 
-            You MUST follow this format when responding:
-            Thought: Do I need to use a tool? Yes/No.
-            Action: The tool name (e.g., search)
-            Action Input: The input to the tool
+            `You are a market research agent that uses the ReAct framework. For each question:
+            - Thought: Decide if a tool is needed (Yes/No).
+            - Action: If Yes, specify 'search' and the query.
+            - Action Input: A precise search query tailored to the question, idea, and theme.
+            - Final Answer: A concise, data-driven answer (one paragraph, max 70 words). Use statistics if available, cite sources (e.g.,), and avoid generic responses. If no data, provide reasoned analysis.
             
-            If you don’t need a tool:
-            Thought: Do I need to use a tool? No.
-            Final Answer: Your final answer in one paragraph.
-            
+            Idea: {idea}
+            Theme: {theme}
             Available tools: {tool_names}
-            
             Tool descriptions: {tools}`
         ],
         ["human", "{input}"],
@@ -66,31 +67,33 @@ export const runMarketAgent = async (idea: string, theme: string) => {
     const executor = new AgentExecutor({
         agent,
         tools,
-        verbose: true
+        verbose: true,
+        maxIterations: 5,
     });
 
     const answers = [];
 
     for (const question of marketQuestions) {
         const promptText = `You are a market researcher. Answer the following question about this idea.
-        Theme: ${theme}
         Idea: ${idea}
+        Theme: ${theme}
         Question: ${question}
         Task: To which of the above themes does this idea belong?
 
         Rules:
-        - Use the search tool to find information about the idea.
+        - Use the market_search tool for relevant information about the idea.
         - Use statistical data where possible.
         - Respond like a professional market analyst.
         - One paragraph only. No markdown or formatting.
         - No more than 70 words.`;
 
         try {
-            const result = await executor.invoke({ input: promptText });
+            const result = await executor.invoke({ input: promptText, idea, theme, question });
             console.log("🧠 Market Agent Result:", result);
             answers.push({ question, answer: result.output });
         } catch (error) {
-            console.error(error);
+            console.log(`Error processing question "${question}":`, error);
+            answers.push({ question, answer: "Unable to retrieve answer due to an error." });
         }
     }
 
