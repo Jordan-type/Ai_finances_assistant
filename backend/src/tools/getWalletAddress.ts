@@ -1,6 +1,6 @@
 import { Address } from 'viem';
-import { createViemWalletClient } from '../viem/createViemWalletClient.js';
-import { ToolConfig } from './allTools.js';
+import { createViemWalletClient } from '../viem/createViemWalletClient';
+import { ToolConfig } from './allTools';
 
 // No arguments needed since we're getting the connected wallet
 interface GetWalletAddressArgs { }

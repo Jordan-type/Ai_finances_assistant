@@ -1,5 +1,5 @@
-import Project from "../project.js";
-import Hackathon from "../hackathon.js";
+import Project from "../models/project";
+import Hackathon from "../models/hackathon";
 
 const getLatestHackathonDetails = async () => {
   const latest = await Hackathon.findOne({}).sort({ createdAt: -1 });

@@ -1,10 +1,10 @@
-import { getBalanceTool } from "./getBalance.js";
-import { getTokenBalanceTool } from "./getTokenBalance.js";
-import { getContractAbiTool } from "./getContractAbi.js";
-import { getWalletAddressTool } from "./getWalletAddress.js";
-import { readContractTool } from "./readContract.js";
-import { sendTransactionTool } from "./sendTransaction.js";
-import { deployErc20Tool } from "./deployErc20.js";
+import { getBalanceTool } from "./getBalance";
+import { getTokenBalanceTool } from "./getTokenBalance";
+import { getContractAbiTool } from "./getContractAbi";
+import { getWalletAddressTool } from "./getWalletAddress";
+import { readContractTool } from "./readContract";
+import { sendTransactionTool } from "./sendTransaction";
+import { deployErc20Tool } from "./deployErc20";
 // import { auditTools } from "./smartContractAudit.js";
 
 export interface ToolConfig<T = any> {

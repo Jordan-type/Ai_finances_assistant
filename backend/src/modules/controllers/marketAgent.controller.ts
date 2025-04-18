@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { runMarketAgent } from "../agents/marketAgent.js";
+import { runMarketAgent } from "../../agents/marketAgent";
 
-import { updateProjectMarketInsights } from "./services/marketAgent.service.js";
-import { getLatestHackathon } from "./services/hackathon.service.js";
-import { getProjectById } from "./services/project.service.js";
+import { updateProjectMarketInsights } from "../services/marketAgent.service";
+import { getLatestHackathon } from "../services/hackathon.service";
+import { getProjectById } from "../services/project.service";
 
 
 const invokeMarketAgent = async (req: Request, res: Response): Promise<void> => {
@@ -18,6 +18,7 @@ const invokeMarketAgent = async (req: Request, res: Response): Promise<void> => 
   
       const project = await getProjectById(projectId);
       const hackathon = await getLatestHackathon();
+      console.log("Hackathon details:", hackathon);
   
       if (!project) {
         res.status(404).json({ 
@@ -32,9 +33,8 @@ const invokeMarketAgent = async (req: Request, res: Response): Promise<void> => 
       }
   
       const themeString = Array.isArray(hackathon.theme) ? hackathon.theme.join(", ") : hackathon.theme;
-  
-      const insights = await runMarketAgent(project.shortDescription, themeString);
-  
+      console.log("Theme String:", themeString);
+      const insights = await runMarketAgent(project.shortDescription, themeString, projectId);
       const updatedProject = await updateProjectMarketInsights(projectId, insights, themeString);
   
       res.status(200).json({
@@ -44,7 +44,10 @@ const invokeMarketAgent = async (req: Request, res: Response): Promise<void> => 
       });
     } catch (err: any) {
       console.log("Error running Market Agent:", err);
-    res.status(500).json({ error: "Internal server error", details: err.message });
+      res.status(500).json({ 
+        error: "Internal server error", 
+        details: err.message 
+      });
     }
 };
 

@@ -1,6 +1,6 @@
 import { Address } from 'viem';
-import { createViemPublicClient } from '../viem/createViemPublicClient.js';
-import { ToolConfig } from './allTools.js';
+import { createViemPublicClient } from '../viem/createViemPublicClient';
+import { ToolConfig } from './allTools';
 
 interface ReadContractArgs {
     contract: Address;

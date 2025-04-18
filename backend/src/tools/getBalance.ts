@@ -1,6 +1,6 @@
 import { Address, formatEther } from 'viem';
-import { createViemPublicClient } from '../viem/createViemPublicClient.js';
-import { ToolConfig } from './allTools.js';
+import { createViemPublicClient } from '../viem/createViemPublicClient';
+import { ToolConfig } from './allTools';
 import { celoAlfajores } from 'viem/chains';
 
 

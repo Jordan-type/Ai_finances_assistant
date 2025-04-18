@@ -1,4 +1,4 @@
-import Hackathon from "../hackathon.js";
+import Hackathon from "../models/hackathon";
 
 const createHackathon = async (data: any) => {
   try {

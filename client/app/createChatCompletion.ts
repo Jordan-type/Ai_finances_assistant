@@ -1,11 +1,10 @@
 "use server";
 
-import { ChatCompletionMessage } from "./chat-completion-message.interface";
 
 export default async function createChatCompletion(messages: ChatCompletionMessage[]) {
   try {
-    console.log(`${process.env.API_URL}/openai/chatCompletion`)
-    const response = await fetch(`${process.env.API_URL}/openai/chatCompletion`, {
+    console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/openai/chatCompletion`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/openai/chatCompletion`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

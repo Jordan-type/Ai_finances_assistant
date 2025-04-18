@@ -1,7 +1,7 @@
 import { Address, formatUnits } from 'viem';
-import { ToolConfig } from './allTools.js';
-import { readContract } from './readContract.js';
-import { ERC20_ABI } from '../const/contractDetails.js';
+import { ToolConfig } from './allTools';
+import { readContract } from './readContract';
+import { ERC20_ABI } from '../const/contractDetails';
 
 interface GetTokenBalanceArgs {
     tokenAddress: Address;

@@ -1,6 +1,6 @@
 import { Address, Hash } from 'viem';
-import { createViemWalletClient } from '../viem/createViemWalletClient.js';
-import { ToolConfig } from './allTools.js';
+import { createViemWalletClient } from '../viem/createViemWalletClient';
+import { ToolConfig } from './allTools';
 
 interface WriteContractArgs {
     address: Address;

@@ -1,6 +1,6 @@
 import { Hash } from 'viem';
-import { createViemPublicClient } from '../viem/createViemPublicClient.js';
-import { ToolConfig } from './allTools.js';
+import { createViemPublicClient } from '../viem/createViemPublicClient';
+import { ToolConfig } from './allTools';
 
 interface GetTransactionReceiptArgs {
     hash: Hash;

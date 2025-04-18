@@ -11,13 +11,14 @@ const questionAnswerSchema = new Schema({
   });
   
   const projectSchema = new Schema({
-    name: { type: String, required: true }, // Project name
+    title: { type: String, required: true }, // Project name
     teamName: { type: String, required: false }, // Team name
     teamMembers: [{ type: String, required: false }], // Could be user IDs or names
   
     shortDescription: { type: String, required: true },
     longDescription: { type: String, required: true },
     githubLink: { type: String, required: true },
+    demoLink: { type: String, required: false }, // Optional demo link
     submissionTime: { type: Date, default: Date.now },
   
     marketAgentAnalysis: [questionAnswerSchema], // Market insights
@@ -36,6 +37,6 @@ const questionAnswerSchema = new Schema({
     next();
   });
   
-  const ProjectModel = mongoose.model("Project", projectSchema);
+  const ProjectModel = mongoose.model("Projects", projectSchema);
   export default ProjectModel;
   

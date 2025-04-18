@@ -1,7 +1,7 @@
-import { ToolConfig } from './allTools.js';
-import { createViemWalletClient } from '../viem/createViemWalletClient.js';
-import { ERC20_ABI, ERC20_BYTECODE } from '../const/contractDetails.js';
-import { createViemPublicClient } from '../viem/createViemPublicClient.js';
+import { ToolConfig } from './allTools';
+import { createViemWalletClient } from '../viem/createViemWalletClient';
+import { ERC20_ABI, ERC20_BYTECODE } from '../const/contractDetails';
+import { createViemPublicClient } from '../viem/createViemPublicClient';
 
 export const deployErc20Tool: ToolConfig = {
     definition: {

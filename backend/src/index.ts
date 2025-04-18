@@ -1,27 +1,47 @@
-
 import "dotenv/config"
 
 
-import { app } from "./app.js";
-import connectDB from "./config/mongodb.config.js";
+import { app } from "./app";
+import connectDB from "./config/mongodb.config";
 
-import { invokeCodeAgent } from "./agents/codeAgent.js"
-// import market agent
-import { runMarketAgent } from "./agents/marketAgent.js";
+// import { invokeCodeAgent } from "./agents/codeAgent.js"
+// import { runMarketAgent } from "./agents/marketAgent.js";
+// import { invokeChatAgent } from "./agents/chatAgent.js";
 
 
 // initialize database connection
-// connectDB().catch((error) => {
-//     console.error('Error during database connection:', error instanceof Error ? error.message : 'Unknown error');
-//     process.exit(1);
-// })
+connectDB().catch((error) => {
+    console.error('Error during database connection:', error instanceof Error ? error.message : 'Unknown error');
+    process.exit(1);
+})
 
 
 // initialize express app
-// const port = process.env.PORT || 3001
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// })
+const port = process.env.PORT || 3001
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+})
+
+// Usage example (testing):
+// (async () => {
+//     const projectMeta = {
+//         idea: "This project implements a decentralized platform for pet-related use cases, leveraging blockchain technology. The system incorporates a token (USDCPaws), donation management, a pet search mechanism, and user registration.",
+//         theme: "Web3 + Animal Welfare",
+//         technologies: ["Solidity", "Next.js", "Celo", "TypeScript", "Tailwind CSS"],
+//       };
+
+//       const chatHistory: any[] = [];
+
+//       const result = await invokeChatAgent(
+//         "https://github.com/Jordan-type/Paws_for_Hope_Hardhat",
+//         projectMeta,
+//         chatHistory,
+//         "What does this project do?"
+//       );
+    
+//       console.log(result);
+//     })();
+    
 
 // (async () => {
 //     const repoLink = "https://github.com/Jordan-type/continuum-block-official"; // ✅ public repo with code
@@ -31,12 +51,9 @@ import { runMarketAgent } from "./agents/marketAgent.js";
 //   })();
 
 // test market 
-const idea = "A decentralized ride-sharing platform for rural Africa using Celo blockchain.";
-const theme = "Decentralization, Ride-sharing, Blockchain for Africa, Mobility, Rural Innovation";
-runMarketAgent(idea, theme).then(answers => console.log(answers));
-
-
-
+// const idea = "A decentralized ride-sharing platform for rural Africa using Celo blockchain.";
+// const theme = "Decentralization, Ride-sharing, Blockchain for Africa, Mobility, Rural Innovation";
+// runMarketAgent(idea, theme).then(answers => console.log(answers));
 
 // async function main() {
 

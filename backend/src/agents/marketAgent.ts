@@ -4,6 +4,7 @@ import { DuckDuckGoSearch } from "@langchain/community/tools/duckduckgo_search";
 import { DynamicTool } from "@langchain/core/tools";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import dotenv from "dotenv";
+import { updateProjectMarketInsights } from "../modules/services/project.service";
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const marketQuestions = [
     "Are there any platforms like the idea, that already exist?",
 ];
 
-export const runMarketAgent = async (idea: string, theme: string) => {
+export const runMarketAgent = async (idea: string, theme: string, projectId: string) => {
     const llm = new ChatOpenAI({
         modelName: "gpt-4o",
         temperature: 0.2,
@@ -94,6 +95,16 @@ export const runMarketAgent = async (idea: string, theme: string) => {
         } catch (error) {
             console.log(`Error processing question "${question}":`, error);
             answers.push({ question, answer: "Unable to retrieve answer due to an error." });
+        }
+    }
+
+    // Save the answers to the database or perform any other action as needed
+    if (projectId) {
+        try {
+            await updateProjectMarketInsights(projectId, answers);
+            console.log("✅ Market Agent: Insights saved to DB.");
+        } catch (error) {
+            console.error("❌ Failed to update market insights in DB:", error);
         }
     }
 

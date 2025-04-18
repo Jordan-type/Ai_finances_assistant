@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants";
-import { tools } from "../tools/allTools.js";
-import { assistantPrompt } from "../const/prompt.js";
+import { tools } from "../tools/allTools";
+import { assistantPrompt } from "../const/prompt";
 
 
 export async function createAssistant(client: OpenAI): Promise<Assistant> {

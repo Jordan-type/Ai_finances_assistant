@@ -1,38 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { ChatCompletionMessage } from "./chat-completion-message.interface";
-import createChatCompletion from "./createChatCompletion";
-import { MultimodalInput } from "@/components/multimodal-input";
-import { toast } from "sonner";
 import { CopyIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
+import { toast } from "sonner";
+
+import { useCreateChatCompletionMutation } from "@/lib/api/chat.api";
+import { MultimodalInput } from "@/components/multimodal-input";
 import { Button } from "@/components/ui/button";
+
+
 export default function Home() {
   const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+
+
+  const [createChatCompletion] = useCreateChatCompletionMutation();
 
   const handleMessage = async (message: string) => {
-    const updatedMessages = [
+    const updatedMessages: ChatCompletionMessage[] = [
       ...messages,
       {
         role: "user",
         content: message,
       },
     ];
+
     setMessages(updatedMessages);
-    setIsLoading(true);
+
     try {
-      const response = (await createChatCompletion(updatedMessages)).choices[0]?.message;
-      if (response) {
-        setMessages([...updatedMessages, response]);
+      const response = await createChatCompletion({messages}).unwrap();
+      const assitantMessage = response.choices?.[0]?.message;
+      console.log("Assistant response:", assitantMessage);
+
+
+      if (assitantMessage) {
+        setMessages([...updatedMessages, assitantMessage]);
       } else {
         toast.error('Failed to get a response from the assistant.');
       }
     } catch (error) {
       toast.error('An error occurred while sending the message.');
       console.error('Error in handleMessage:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 

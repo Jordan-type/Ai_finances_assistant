@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const hackathonSchema = new Schema({
-  name: { type: String, required: true },
+  title: { type: String, required: true },
   description: { type: String, required: false },
   theme: [{ type: String, required: true }], // List of themes
   technologies: [{ type: String, required: true }], // e.g., ["Python", "Solidity", "Celo"]
@@ -17,5 +17,5 @@ hackathonSchema.pre("save", function (next) {
   next();
 });
 
-const HackathonModel = mongoose.model("Hackathon", hackathonSchema);
+const HackathonModel = mongoose.model("Hackathons", hackathonSchema);
 export default HackathonModel;
