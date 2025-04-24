@@ -1,0 +1,12 @@
+{
+  "name": "hack-sight",
+  "private": true,
+  "workspaces": [
+    "packages/*", 
+    "apps/*"
+  ],
+  "version": "0.0.1",
+  "description": "A monorepo for AI Brokers Crypto",
+  "license": "MIT",
+  "author": "Jordan type"
+}
