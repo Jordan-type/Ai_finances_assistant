@@ -1,4 +1,4 @@
-import express, { Request, Response, RequestHandler } from "express";
+import express, { Router, Request, Response, RequestHandler } from "express";
 import OpenAI from "openai";
 
 // openAI client
@@ -8,7 +8,7 @@ import { createRun } from "../../openai/createRun";
 import { performRun } from "../../openai/performRun";
 
 
-const router = express.Router();
+const router: Router = express.Router();
 
 const client = new OpenAI();
 

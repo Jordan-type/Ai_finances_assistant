@@ -1,4 +1,4 @@
-import { createQuantAnalystAgent } from "../quant/quantAnalyst";
+import { createQuantAnalystAgent } from "../quant-analyst";
 import { exportSignalsToCSV } from "../utils/exportSignals";
 import { getLangChainTools } from "@coinbase/agentkit-langchain";
 

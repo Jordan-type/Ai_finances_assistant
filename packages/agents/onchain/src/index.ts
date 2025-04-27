@@ -8,6 +8,13 @@ import { ChatOpenAI } from "@langchain/openai";
 import * as fs from "fs";
 import { config, validateConfig } from "./config";
 
+import { createQuantAnalystAgent } from "./quant-analyst";
+import { analyzeSentiment } from "./sentiment-analyst";
+import { analyzeFundamentals } from "./fundamental-analyst";
+import { getTraderBehaviorAgent } from "./trader-behavior-analyst";
+import { getRiskManagerAgent } from "./risk-manager-analyst";
+import { getFundManagerAgent } from "./fund-manager-analyst";
+
 const WALLET_DATA_FILE = "wallet_data.txt";
 
 export async function initializeAgent() {
@@ -75,3 +82,22 @@ export async function initializeAgent() {
 
   return { agent, config: { configurable: { thread_id: "agent-onchain-session" } } };
 }
+
+
+export { 
+  createQuantAnalystAgent,
+  analyzeSentiment,
+  analyzeFundamentals,
+  getTraderBehaviorAgent,
+  getRiskManagerAgent,
+  getFundManagerAgent 
+}; 
+
+export const allAgents = {
+  createQuantAnalystAgent,
+  analyzeSentiment,
+  analyzeFundamentals,
+  getTraderBehaviorAgent,
+  getRiskManagerAgent,
+  getFundManagerAgent,
+};

@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants.mjs";
-import { tools } from "../tools/allTools";
+import { tools } from "../blockchain-tools/allTools";
 import { assistantPrompt } from "../const/prompt";
 
 

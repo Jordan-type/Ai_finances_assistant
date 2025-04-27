@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".", 
+      "paths": {
+        "@agents/onchain": ["packages/agents/onchain/src/index.ts"]
+      }
+    }
+  }
+  

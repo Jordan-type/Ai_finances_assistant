@@ -11,7 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@agents/onchain": ["../../packages/agents/onchain/dist"],
     }
   },
   "include": ["src/**/*", "src/data/**/*.json"],   // "include": ["src/**/*.ts"],
