@@ -2,11 +2,23 @@
   "name": "@agents/onchain",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "commonjs",
+  "license": "MIT",
+  "description": "Onchain agent for Fund Manager",
+  "private": true,
+  "author": "LightIdasLabs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "dev": "ts-node src/index.ts",
     "build": "tsc",
-    "test:onchain": "tsx --loader ts-node/esm ./src/test/onchainAgentTest.ts"
+    "watch": "tsc -w",
+    "dev": "ts-node src/index.ts",
+    "test:onchain": "tsx --loader ts-node/esm ./src/test/*.test.ts"
   },
   "dependencies": {
     "@coinbase/agentkit": "^0.6.2",

@@ -1,8 +1,8 @@
-import { Router } from "express";
+import express, { Router, Request, Response, RequestHandler } from "express";
 
 import { createProjectHandler, createHackathonHandler, getProjectByIdHandler, getAllProjectsHandler, updateReviewStatusHandler, searchProjectsHandler,} from "../../modules/controllers/projects.controller";
 
-const router = Router();
+const router: Router = Router();
 
 router.post("/projects", createProjectHandler);
 router.post("/hackathons", createHackathonHandler);

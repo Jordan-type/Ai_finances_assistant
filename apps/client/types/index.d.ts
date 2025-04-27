@@ -1,4 +1,10 @@
 declare global {
+
+  interface WizardStepperProps {
+    currentStep: number;
+  }
+
+
   interface ChatCompletionMessage {
     role: string;
     content: string;

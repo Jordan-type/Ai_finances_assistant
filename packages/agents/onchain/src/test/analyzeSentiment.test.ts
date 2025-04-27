@@ -1,4 +1,4 @@
-import { analyzeSentiment } from "../sentiment/index";
+import { analyzeSentiment } from "../sentiment-analyst/index";
 
 (async () => {
   const result = await analyzeSentiment({

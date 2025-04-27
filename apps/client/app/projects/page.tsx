@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useGetAllProjectsQuery } from "@/lib/api/projects.api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/components/cards/ProjectCard";
 import Loading from "@/components/Loading";
 import ProjectModal from "./[id]/ProjectModal";
 import HackathonModal from "./[id]/HackathonModal";
