@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { Run } from "openai/resources/beta/threads/runs/runs.mjs"
 import { Thread } from "openai/resources/beta/threads/threads.mjs";
-import { tools } from "../tools/allTools";
+import { tools } from "../blockchain-tools/allTools";
 
 
 export async function handleRunToolCalls(run: Run, client: OpenAI, thread: Thread): Promise<Run> {

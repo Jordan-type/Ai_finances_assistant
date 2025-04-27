@@ -1,4 +1,4 @@
-import { analyzeFundamentals } from "../fundamental/index";
+import { analyzeFundamentals } from "../fundamental-analyst/index";
 
 const runTest = async () => {
   const testInputs = {
